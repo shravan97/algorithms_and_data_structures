@@ -34,7 +34,7 @@ public:
 		adj[V].push_back(w);
 	}
 
-	void DFS_initiator(int start);// This function initiates the DFS process from the given vertex
+	void DFS_initiator(int V);// This function initiates the DFS process from the given vertex
 
 	~graph()
 	{
