@@ -63,13 +63,18 @@ void graph::BFS(int V)
 int main()
 {
 	//Sample test
-	graph g(5);
+	graph g(11);
 	g.addEdge(0,1);
-	g.addEdge(1,2);
 	g.addEdge(0,2);
-	g.addEdge(2,3);
-	g.addEdge(4,1);
-	g.BFS(4);
+	g.addEdge(0,3);
+	g.addEdge(0,4);
+	g.addEdge(1,5);
+	g.addEdge(1,6);
+	g.addEdge(1,7);
+	g.addEdge(1,8);
+	g.addEdge(2,9);
+	g.addEdge(1,10);				
+	g.BFS(0);
 
 	return 0;
 
