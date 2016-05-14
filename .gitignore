@@ -1,3 +1,4 @@
 a.out
 quicksort/*.class
 *.class
+*.pyc
