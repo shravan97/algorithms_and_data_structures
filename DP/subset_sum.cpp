@@ -5,9 +5,8 @@ typedef long long int ll;
 f(val[i],sum) = f(val[i-1],sum-val[i])+val[i]
 f[i][j]=f[i][j-a[i]]+a[i]
 
-1 6 3 9 2 10
-
 */
+
 int main()
 {
 	ll n , sum , i , j;
