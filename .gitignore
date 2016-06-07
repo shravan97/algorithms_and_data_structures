@@ -1,4 +1,5 @@
 a.out
 quicksort/*.class
+back_tracking/*.class
 *.class
 *.pyc
