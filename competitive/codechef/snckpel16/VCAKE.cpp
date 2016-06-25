@@ -1,6 +1,38 @@
 #include <cstdio>
 using namespace std;
 typedef long long int l;
+bool chck(l m , l k , l j , l b , l s , l area)
+{
+	int flag=0;
+	if(m%b==0 && (m/b)<s)
+			{
+				flag=1;
+				area-=m;
+				s-=(m/b);
+				// printf("Here1  %lld %lld %lld\n",area , s,b);
+			}
+			else if(m%s==0 && (m/s)<b)
+			{
+				flag=1;
+				area-=m;
+				b-=(m/s);
+			}
+
+			if(flag)
+			{
+				flag=0;
+				if((k%b==0 && (k/b)<s) || (k%s==0 && (k/s)<b))
+				{
+					flag=1;
+					return 1;
+				}
+			}
+
+			if(!flag)
+			{
+				return 0;
+			}
+}
 int main(int argc, char const *argv[])
 {
 	l t;
@@ -28,7 +60,7 @@ int main(int argc, char const *argv[])
 					j=m;
 					m=temp;
 				}
-				else if(j>k)
+				if(j>k)
 				{
 					l temp=j;
 					j=k;
@@ -46,7 +78,7 @@ int main(int argc, char const *argv[])
 					j=m;
 					m=temp;
 				}
-				else if(j>k)
+				if(j>k)
 				{
 					temp=j;
 					j=k;
@@ -55,60 +87,14 @@ int main(int argc, char const *argv[])
 			}
 			// printf("%lld %lld %lld\n",m,k,j );
 			l i,s = (r>c)?c:r , b =r+c-s ;
-			for(i=1;i<=s;i++)
+			if(chck(m,k,j,b,s,area)==0)
 			{
-				if(m%i==0 && (m/i)==b)
-				{
-					if((i==s && k==0 && j==0) || (i!=s))
-					{
-						flag=1;
-						flag1=1;
-						s-=i;
-						printf("Yes\n");
-						area-=m;
-						break;
-					}
-				}
-				else if(m%i==0 && (m/i)<b && i==s)
-				{
-					flag=1;
-					b-=(m/i);
-					area-=m;
-					break;
-				}
+				if(chck(m,k,j,s,b,area)==0)
+					printf("No\n");
+				else printf("Yes\n");
 			}
-
-			if(flag && flag1==0)
-			{
-				flag=0;
-				for(i=1;i<=s;i++)
-			    {
-			    	if(k%i==0 && (k/i)==b)
-					{
-						if((i==s && j==0) || (i!=s))
-						{
-							flag=1;
-							s-=i;
-							area-=k;
-							printf("Yes\n");
-							break;
-						}
-					}
-					else if(k%i==0 && (k/i)<b && i==s)
-					{
-						flag=1;
-						b-=(k/i);
-						area-=k;
-						printf("Yes\n");
-						break;
-					}
-				}
-			}
-
-			if(!flag && !flag1)
-			{
-				printf("No\n");
-			}
+			else
+				printf("Yes\n");
 		}
 	}
 	return 0;
