@@ -18,6 +18,7 @@ class KMP
 			}
 
 			lpas[i] = val;
+			System.out.println(val);
 		}
 
 		int match=0,j=0;
@@ -51,8 +52,8 @@ class KMP
 
 	public static void main(String[] args) 
 	{
-		String st = new String("aababca");
+		String st = new String("abcba");
 		KMP obj = new KMP();
-		obj.kmp("asdaaababcawetgefaagaababcaasd",st);
+		obj.kmp("asdaaabcabcawetgefabcbaagaababcabcaasd",st);
 	}
 }
