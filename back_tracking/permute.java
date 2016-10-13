@@ -27,9 +27,9 @@ class permutations
 
 	public static void main(String[] args)
 	{
-		String a = "abc";
+		String a = "abcdef";
 		permutations pr = new permutations();
-		pr.permute(a.toCharArray() , 0,3);
+		pr.permute(a.toCharArray() , 0,6);
 	}
 	
 }
