@@ -1,100 +1,87 @@
 #include <cstdio>
-#include <list>
+#include <cstring>
 #include <vector>
-#include <set>
+typedef long long int ll;
 using namespace std;
 
-std::list <long long int> *graph;
-vector <int> color;
-bool state=0;
-long long int freq[2] = {0,0};
-int count=0;
-int dfs(long long int n , long long int it=1)
+std::vector<ll> *v , blue , red;
+std::vector< std::vector<ll> > connected;
+bool dfs(ll index , int *color , int c , ll *visited)
 {
-	long long int i;
-	bool cur_st=state;
-	for(list <long long int >::iterator t=graph[it].begin();t!=graph[it].end();t++)
+	if(!v[index].empty())connected[connected.end()-1].push_back(index);
+	if((*(color+index)!=0) && *(color+index)!=c)
+		return 0;
+	*(color+index)=c;
+	if((c==1) && !v[index].empty())blue.push_back(index);
+	else if(!v[index].empty()) red.push_back(index);
+	else return 0;
+	*(visited + index)=1;
+	
+	for(std::vector<ll>::iterator i=v.begin(); i!=v.end();i++)
 	{
-		printf("%lld %d %d\n",*t,color[*t],cur_st );
-		if(color[*t]==-1)
-		{
-			color[*t]=cur_st;
-			freq[color[*t]]++;
-		}
-		else if(color[*t]!=cur_st)
-		{
-			return -1;
-		}
-
-		state = (state==0)?1:0;
-		int b = dfs(n,*t);
-		if(b==-1)return -1;
+		bool b = dfs(*i,color,(c==1)?2:1,visited);
+		if(b==0)return 0;
 	}
 	return 1;
 }
-
 int main(int argc, char const *argv[])
 {
-	long long int n,m,i;
+	ll n,m,i,cc=0,ns=0;
 	scanf("%lld %lld",&n,&m);
-	
-	graph = new std::list<long long int> [n+1];
-	for(i=0;i<m;i++)
-	{
-		long long int v1,v2;
-		scanf("%lld %lld",&v1,&v2);
-		if(graph[v1].size() >= graph[v2].size())
-			graph[v1].push_back(v2);
-		else graph[v2].push_back(v1);
-	}
-	vector <int> col(n+1,-1);
-	color=col;
-	if(!graph[1].empty())
-	{
-		color[1]=1;
-		freq[1]++;
-	}
-	std::set<long long int> v0;
-	std::set<long long int> v1;
+	v = new std::vector<ll>[n+1];
+	int color[n+1];
+	ll visited[n+1];
 
-	bool flag=0;
+	memset(color,0,n+1);
+	memset(visited,0,n+1);
+
 	for(i=1;i<=n;i++)
 	{
-		if(color[i]==-1 || i==1)
+		if(!visited[i])
 		{
-			
-			if(dfs(n,i)==-1)
+			if(!v[i].empty())
 			{
-				flag=1;
-				break;
+				std::vector<ll> temp;
+				connected.push_back(temp);
+				cc++;
+				if(dfs(i,color,1,visited)==0)
+				{
+					ns++;
+				}
 			}
 		}
 	}
 
-	if(flag==1)
-		printf("-1\n");
-	else
+	if(cc==1)
 	{
-		for(i=1;i<=n;i++)
+		if(ns==1)printf("-1\n");
+		else
 		{
-			if(color[i]==0)v0.insert(i);
-			else if(color[i]==1) v1.insert(i);
-			for(list<long long int>::iterator k=graph[i].begin();k!=graph[i].end();k++)
+			printf("%lld\n",blue.size());
+			vector<ll>::iterator it;
+			for(it=blue.begin();it!=blue.end();it++)
+				printf("%lld\n",*it );
+
+			printf("%lld\n",red.size());
+			for(it=red.begin();it!=red.end();it++)
+				printf("%lld\n",*it );
+			
+		}
+	}
+	else if(cc==ns)
+	{
+		for(int j=0;j<2;j++)
+		{
+			printf("%lld\n",connected[j].size() );
+			for (std::vector<ll>::iterator itr = connected[j].begin(); itr != connected[j].end(); ++itr)
 			{
-				if(color[*k]==0)
-					v0.insert(*k);
-				else if(color[*k]==1) v1.insert(*k);
+				printf("%lld\n",*itr );
 			}
 		}
-
-		printf("%lld\n",freq[0] );
-		for(set<long long int>::iterator k=v0.begin();k!=v0.end();k++)
-			printf("%lld ",*k );
-		printf("\n%lld\n",freq[1]);
-		for(set<long long int>::iterator k=v1.begin();k!=v1.end();k++)
-			printf("%lld ",*k );
-
 	}
+	else
+		
+
 
 	return 0;
 }
