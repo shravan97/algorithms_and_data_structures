@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct node
@@ -20,7 +20,7 @@ public:
 	{
 		return root;
 	}
-	node * set_root(node * leaf)
+	void set_root(node * leaf)
 	{
 		root = leaf;
 	}
@@ -77,6 +77,27 @@ public:
 			cout<<leaf->data<<' ';
 		}
 	}
+
+	void level_order(node * root)
+	{
+		queue <node *> q;
+
+		q.push(root);
+
+		while(!q.empty())
+		{
+			node * top = q.front();
+			if(top==NULL)
+				q.pop();
+			else
+			{
+				cout<<top->data<<endl;
+				q.push(top->left);
+				q.push(top->right);
+			}
+			q.pop();
+		}
+	}
 	
 };
 
@@ -94,6 +115,7 @@ int main(int argc, char const *argv[])
 	
 	
 	t.set_root(root);
-	t.postorder(root);
+	// t.postorder(root);
+	t.level_order(root);
 	return 0;
 }

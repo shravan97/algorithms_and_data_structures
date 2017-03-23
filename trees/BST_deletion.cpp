@@ -84,6 +84,7 @@ node * Tree_insert(node * root ,int val)
 
 int main(int argc, char const *argv[])
 {
+
 	Tree t;
 	t.root = NULL;
 	t.root = Tree_insert(t.root,10);

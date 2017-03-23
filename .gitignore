@@ -1,5 +1,7 @@
 a.out
-quicksort/*.class
-back_tracking/*.class
 *.class
 *.pyc
+file*
+op.txt
+out.txt
+inp.txt

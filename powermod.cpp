@@ -12,7 +12,7 @@ ll powmod(ll a , ll b , ll m)
 	else
 	{
 		ll t = powmod(a,b/2,m);
-		if(b&2)
+		if(b&1)
 		{
 			return (t*t*a)%m;
 		}

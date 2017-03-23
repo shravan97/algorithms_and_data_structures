@@ -41,6 +41,11 @@ long long int fibo(long long int n)
 {
 	mat f = {1,1,1,0};
 
+	if(n==0)
+		return 0;
+	if(n==1)
+		return 1;
+
 	mat res = pow(f,n-1);
 	return res.a;
 }

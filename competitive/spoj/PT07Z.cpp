@@ -5,7 +5,7 @@ using namespace std;
 typedef long long int ll;
 list<ll> tree[10005];
 bool visited[10005];
-long int l1=0,l2=0;
+ll l1=0,l2=0;
 ll dfs(bool * visited , ll v)
 {
 	visited[v]=1;
@@ -27,8 +27,8 @@ ll dfs(bool * visited , ll v)
 		}
 	}
 
-	if(v==1)
-		return max2+max1;
+	if(l1<max1+max2)
+		l1=max1+max2;
 	return max1;
 
 }
@@ -45,7 +45,9 @@ int main(int argc, char const *argv[])
 		tree[b].push_back(a);
 	}
 
-	printf("%lld\n",dfs(visited,1) );
+	ll val = dfs(visited,1);
+
+	printf("%lld\n", l1);
 
 	return 0;
 }

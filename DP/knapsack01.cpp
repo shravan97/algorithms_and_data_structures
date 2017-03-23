@@ -6,19 +6,19 @@ typedef long long int ll;
 int main()
 {
 	ll n , wmax ,i;
-	cout<<"Enter the total number of items and maximum allowable weight : ";
-	cin>>n>>wmax;
+	// cout<<"Enter the total number of items and maximum allowable weight : ";
+	cin>>wmax>>n;
 
 	ll weights[n] , values[n] , d[n+1][wmax+1];
-	cout<<"enter weights :";
+	// cout<<"enter weights :";
 
 	for(i=0;i<n;i++)
-		cin>>weights[i];
+		cin>>values[i]>>weights[i];
 
-	cout<<"enter values :";
+	// cout<<"enter values :";
 
-	for(i=0;i<n;i++)
-		cin>>values[i];
+	// for(i=0;i<n;i++)
+		// cin>>values[i];
 	
 	for(i=0;i<=n;i++)
 	{
@@ -35,7 +35,7 @@ int main()
 		}
 	}
 
-	cout<<"Total Value : "<<d[n][wmax];
+	cout<<"Total Value : "<<d[n][wmax]<<endl;
 
 	return 0;
 }
